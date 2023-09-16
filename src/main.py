@@ -1,8 +1,9 @@
+"""This is the main code entry point."""
+
 import argparse
 
-from modules.process_team_summary import read_data
-from modules.process_team_summary import introduce_team
-from modules.process_team_summary import give_details
+from modules.process_team_summary import introduce_team  # D
+from modules.process_team_summary import give_details, read_data
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process a summary for team kenya.")
