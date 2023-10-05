@@ -1,36 +1,36 @@
 [
     {
-        "Name":"Ahmed", 
+        "Name":"Ahmed",
         "Role":"Data Engineer"
     },
     {
-        "Name":"Janerose", 
+        "Name":"Janerose",
         "Role":"Data Engineer"
     },
     {
-        "Name":"George", 
+        "Name":"George",
         "Role":"Data Engineer"
     },
     {
-        "Name":"Daniel", 
+        "Name":"Daniel",
         "Role":"Data Engineer"
     },
     {
-        "Name":"Jackson", 
+        "Name":"Jackson",
         "Role":"Data Engineer"
     },
     {
-        "Name":"Edward", 
+        "Name":"Edward",
         "Role":"Director Operations"},
     {
-        "Name":"Maryanne", 
+        "Name":"Maryanne",
         "Role":"Timesheets Coordinator"},
     {
-        "Name":"Anne", 
+        "Name":"Anne",
         "Role":"Head of Marketing"
     },
     {
-        "Name":"Vivian", 
-        "Role":"Head Talent Aquicitions"
+        "Name":"Vivian",
+        "Role":"Head Talent Acquisitions"
     }
 ]
