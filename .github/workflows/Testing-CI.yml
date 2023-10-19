@@ -1,0 +1,53 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: adept_profiler-Python compile
+
+on:
+  push:
+    branches: [ "feature/*", "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Test with pytest
+      run: |
+        #pytest
+        python -m unittest tests.unit_tests
+    - name: Notify dedicated teams channel - Success
+      if: success()
+      uses: jdcargile/ms-teams-notification@v1.3
+      with:
+        github-token: ${{ github.token }} # this will use the runner's token.
+        ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+        notification-summary: python_project_template Tested Succesfully
+        notification-color: 17a2b8
+        timezone: America/Denver
+    - name: Notify dedicated teams channel - Failure
+      if: failure()
+      uses: jdcargile/ms-teams-notification@v1.3
+      with:
+        github-token: ${{ github.token }} # this will use the runner's token.
+        ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+        notification-summary: python_project_template Test Failed
+        notification-color: dc143c
+        timezone: America/Denver
