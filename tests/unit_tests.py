@@ -3,9 +3,11 @@
 import io
 import json
 import os
+import shutil
 import sys
 import tempfile
 import unittest
+
 
 from src.modules.process_team_summary import give_details  # G
 from src.modules.process_team_summary import introduce_team  # I
@@ -29,12 +31,11 @@ class TestEmployeeFunctions(unittest.TestCase):
             {"Name": "Bob", "Role": "Manager"},
             {"Name": "Charlie", "Role": "Designer"},
         ]
-        with open(self.temp_json_file, "w") as f:
+        with open(self.temp_json_file, "w", encoding='UTF-8') as f:
             json.dump(sample_data, f)
 
     def tearDown(self):
         """Remove the temporary directory and its contents."""
-        import shutil
 
         shutil.rmtree(self.temp_dir)
 
