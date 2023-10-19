@@ -15,7 +15,7 @@ def read_data(path):
     """
     filename = "teamke.json"
     full_path = os.path.join(path, filename)
-    with open(full_path, "r") as file:
+    with open(full_path, "r", encoding='UTF-8') as file:
         data = json.load(file)
     return data
 
@@ -57,5 +57,3 @@ def give_details(data):
     print()
     for record in data:
         print(f'{record["Name"]} works as {record["Role"]}.')
-
-    return
