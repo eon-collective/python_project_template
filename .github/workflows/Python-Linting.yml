@@ -1,4 +1,4 @@
-name: python_project_template Pylint
+name: python_project_template - Pylint
 
 on: [push]
 

@@ -1,4 +1,4 @@
-name: python_project_template Docker Build
+name: python_project_template - Docker Build
 
 on:
   push:
