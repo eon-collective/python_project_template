@@ -27,8 +27,8 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        python -m pip3 install --upgrade pip
+        if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
     - name: Test with python unit test
       run: |
         #pytest
@@ -40,7 +40,7 @@ jobs:
         github-token: ${{ github.token }} # this will use the runner's token.
         ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
         notification-summary: python_project_template Tested Succesfully
-        notification-color: 17a2b8
+        notification-color: 32cd32
         timezone: America/Denver
     - name: Notify dedicated teams channel - Failure
       if: failure()
