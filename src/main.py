@@ -7,8 +7,8 @@ from modules.process_team_summary import give_details, read_data
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        prog='hello_world'
-        description='''Process a summary for team kenya.'''
+        prog='hello_world',
+        description='''Process a summary for team kenya.''',
         epilog='ADEPT Utilities')
 
     # Add application arguments
