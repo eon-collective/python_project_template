@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.8.0"]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -31,3 +31,22 @@ jobs:
       run: docker images
     - name: run the Docker image - show help
       run: docker run python_project_template:$(git rev-parse --short HEAD) --help
+    
+    - name: Notify dedicated teams channel - Success
+      if: success()
+      uses: jdcargile/ms-teams-notification@v1.3
+      with:
+        github-token: ${{ github.token }} # this will use the runner's token.
+        ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+        notification-summary: python_project_template Docker Build Succesfully with Python Version ${{ matrix.python-version }}
+        notification-color: 32cd32
+        timezone: America/Denver
+    - name: Notify dedicated teams channel - Failure
+      if: failure()
+      uses: jdcargile/ms-teams-notification@v1.3
+      with:
+        github-token: ${{ github.token }} # this will use the runner's token.
+        ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+        notification-summary: python_project_template Docker Build Failed with Python Version ${{ matrix.python-version }}
+        notification-color: dc143c
+        timezone: America/Denver
