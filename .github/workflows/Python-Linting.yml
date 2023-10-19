@@ -23,14 +23,15 @@ jobs:
         ls -ltr
         echo $(git ls-files '*.py')
         pylint $(git ls-files '*.py')
+    
     - name: Notify dedicated teams channel - Success
       if: success()
       uses: jdcargile/ms-teams-notification@v1.3
       with:
         github-token: ${{ github.token }} # this will use the runner's token.
         ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-        notification-summary: python_project_template Linting Succesful
-        notification-color: 17a2b8
+        notification-summary: python_project_template PyLint Succesfully with Python Version ${{ matrix.python-version }}
+        notification-color: 32cd32
         timezone: America/Denver
     - name: Notify dedicated teams channel - Failure
       if: failure()
@@ -38,6 +39,6 @@ jobs:
       with:
         github-token: ${{ github.token }} # this will use the runner's token.
         ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-        notification-summary: python_project_template Linting Failed
+        notification-summary: python_project_template PyLint Failed with Python Version ${{ matrix.python-version }}
         notification-color: dc143c
         timezone: America/Denver
