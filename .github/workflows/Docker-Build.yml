@@ -1,0 +1,52 @@
+name: python_project_template Docker Build
+
+on:
+  push:
+    branches: [ "main", "feature/*"]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Check python version
+      run: python --version
+    - name: adept_profiler -Build Docker image
+      run: docker build . --file Dockerfile --tag python_project_template:latest --tag python_project_template:$(python3 src/main.py --version | awk '($1 == "hello_world") {print $2 += .01; exit}') --tag python_project_template:$(git rev-parse --short HEAD)
+    - name: List the available Docker images
+      run: docker images
+    - name: run the Docker image - show help
+      run: docker run python_project_template:$(python3 src/main.py --version | awk '($1 == "hello_world") {print $2 += .01; exit}') --help
+    
+    - name: Notify dedicated teams channel - Success
+      if: success()
+      uses: jdcargile/ms-teams-notification@v1.3
+      with:
+        github-token: ${{ github.token }} # this will use the runner's token.
+        ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+        notification-summary: python_project_template Docker Build Succesfully with Python Version ${{ matrix.python-version }}
+        notification-color: 32cd32
+        timezone: America/Denver
+    - name: Notify dedicated teams channel - Failure
+      if: failure()
+      uses: jdcargile/ms-teams-notification@v1.3
+      with:
+        github-token: ${{ github.token }} # this will use the runner's token.
+        ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+        notification-summary: python_project_template Docker Build Failed with Python Version ${{ matrix.python-version }}
+        notification-color: dc143c
+        timezone: America/Denver
