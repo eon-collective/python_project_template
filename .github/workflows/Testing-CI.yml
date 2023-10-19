@@ -48,6 +48,6 @@ jobs:
       with:
         github-token: ${{ github.token }} # this will use the runner's token.
         ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-        notification-summary: python_project_template Test Failed
+        notification-summary: python_project_template Test Failed with Python Version ${{ matrix.python-version }}
         notification-color: dc143c
         timezone: America/Denver
