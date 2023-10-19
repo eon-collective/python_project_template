@@ -1,5 +1,12 @@
 ## Team Description Connector
 
+[![Linting](https://github.com/eon-collective/python_project_template/actions/workflows/Python-Linting.yml/badge.svg)](https://github.com/eon-collective/python_project_template/actions/workflows/Python-Linting.yml)
+
+[![Docker Build](https://github.com/eon-collective/python_project_template/actions/workflows/Docker-Build.yml/badge.svg)](https://github.com/eon-collective/python_project_template/actions/workflows/Docker-Build.yml)
+
+[![python_project_template - PyTest](https://github.com/eon-collective/python_project_template/actions/workflows/Testing-CI.yml/badge.svg)](https://github.com/eon-collective/python_project_template/actions/workflows/Testing-CI.yml)
+
+
 This connector takes employees data and give back a summary of what every one does, number of employees and a count of employees per role.
 
 ## Table of Contents
