@@ -33,7 +33,7 @@ jobs:
       with:
         github-token: ${{ github.token }} # this will use the runner's token.
         ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-        notification-summary: python_project_template PyLint Succesfully with Python Version ${{ matrix.python-version }} >> ${{ github.event.head_commit.message }}
+        notification-summary: python_project_template PyLint Succesfully with Python Version ${{ matrix.python-version }} U+1F4E8 ${{ github.event.head_commit.message }} &#x2705
         notification-color: 32cd32
         timezone: America/Denver
     - name: Notify dedicated teams channel - Failure
@@ -42,6 +42,6 @@ jobs:
       with:
         github-token: ${{ github.token }} # this will use the runner's token.
         ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-        notification-summary: python_project_template PyLint Failed with Python Version ${{ matrix.python-version }} >> ${{ github.event.head_commit.message }}
+        notification-summary: python_project_template PyLint Failed with Python Version ${{ matrix.python-version }} U+1F4E8 ${{ github.event.head_commit.message }} &#x274C
         notification-color: dc143c
         timezone: America/Denver
